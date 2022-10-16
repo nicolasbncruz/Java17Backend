@@ -4,10 +4,13 @@
  */
 package edu.cibertec.capitulo1.beans;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Nicolas Cruz https://profesionaljava.com
  */
+@Component
 public class DocumentoTexto implements Imprimible{
 
     @Override

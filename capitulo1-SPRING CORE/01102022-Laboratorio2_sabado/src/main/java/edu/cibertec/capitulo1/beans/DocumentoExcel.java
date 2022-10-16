@@ -4,11 +4,14 @@
  */
 package edu.cibertec.capitulo1.beans;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Nicolas Cruz https://profesionaljava.com
  */
-public class DocumentoTextoExcel implements Imprimible{
+@Component
+public class DocumentoExcel implements Imprimible{
 
     @Override
     public String imprimir() {

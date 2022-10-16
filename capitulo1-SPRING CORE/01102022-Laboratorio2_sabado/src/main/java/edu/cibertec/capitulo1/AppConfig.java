@@ -4,8 +4,7 @@
  */
 package edu.cibertec.capitulo1;
 
-import edu.cibertec.capitulo1.beans.HolaMundo;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -13,7 +12,13 @@ import org.springframework.context.annotation.Configuration;
  * @author Nicolas Cruz https://profesionaljava.com
  */
 @Configuration
+@ComponentScan// component scan - repository - service - controller a cualquiera de esos componentes los reconoce
 public class AppConfig {
+    
+    /*@Bean
+    public HolaMundo holaMundoBean(){
+        return new HolaMundo();
+    }*/
     
     /*
     @Bean
@@ -22,23 +27,13 @@ public class AppConfig {
     }
     
     @Bean
-    public DocumentoTextoExcel documentoTextoExcel(){
-        return new DocumentoTextoExcel();
+    public DocumentoExcel documentoExcel(){
+        return new DocumentoExcel();
     }
     
     @Bean
-    public ImpresoraService impresoraTextoServiceBean(){
+    public ImpresoraService impresoraServiceBean(){
         return new ImpresoraService();
-    }
-    
-    @Bean
-    public ImpresoraService impresoraTextoExcelServiceBean(){
-        return new ImpresoraService();
-    }*/
-    
-    @Bean
-    public HolaMundo holaMundoBean(){
-        return new HolaMundo();
-    }
+    }    */
     
 }
