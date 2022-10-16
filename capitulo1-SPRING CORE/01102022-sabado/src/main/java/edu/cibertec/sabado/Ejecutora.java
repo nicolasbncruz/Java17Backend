@@ -2,6 +2,7 @@ package edu.cibertec.sabado;
 
 
 import edu.cibertec.sabado.beans.HolaMundo;
+import edu.cibertec.sabado.service.ImpresoraService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -21,6 +22,8 @@ public class Ejecutora {
         //ApplicationContext cxt = new AnnotationConfigApplicationContext(AppConfig.class);
         HolaMundo hm = (HolaMundo)cxt.getBean("holaMundoBean");
         hm.saludar();
+        ImpresoraService is = (ImpresoraService) cxt.getBean("impresoraServiceBean");
+        is.imprimirDocumento();
         ((ConfigurableApplicationContext)cxt).close();
     }
 }
