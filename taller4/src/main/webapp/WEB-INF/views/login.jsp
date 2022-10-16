@@ -16,11 +16,11 @@
                 <div class="col-md-6 col-xs-12 div-style">
                     <form action="loginAccion.do" method="post">
                         <div class="form-group">
-                            Usuario: <input type="text" id="txtUsuario"  name="txtUsuario" class="form-control text-box" 
+                            Usuario: <input type="text" name="usuario" class="form-control text-box" 
                                             required placeholder="Usuario">
                         </div>
                         <div class="form-group">
-                            Clave: <input type="password" id="txtClave" name="txtClave" class="form-control text-box" 
+                            Clave: <input type="password" name="clave" class="form-control text-box" 
                                           required placeholder="Clave">
                         </div>
                         <div class="form-group justify-content-center d-flex">

@@ -1,6 +1,7 @@
 package edu.cibertec.repository;
 
 import edu.cibertec.dto.UsuarioDTO;
+import java.util.List;
 
 /**
  *
@@ -9,4 +10,8 @@ import edu.cibertec.dto.UsuarioDTO;
 
 public interface UsuarioDao {
     public UsuarioDTO validarLogin (UsuarioDTO usuario);
+    public void insertarUsuario(UsuarioDTO usuario);
+    public List<UsuarioDTO>listarUsuarios();
+    public UsuarioDTO getUsuario(Integer idUsuario);
+    public void subirFoto(UsuarioDTO usuario);
 }

@@ -18,6 +18,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Ejecutora {
     public static void main(String[] args) {
         ApplicationContext cxt = new ClassPathXmlApplicationContext("beans.xml");
+        //ApplicationContext cxt = new AnnotationConfigApplicationContext(AppConfig.class);
         HolaMundo hm = (HolaMundo)cxt.getBean("holaMundoBean");
         hm.saludar();
         ((ConfigurableApplicationContext)cxt).close();

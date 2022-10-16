@@ -4,19 +4,21 @@ package edu.cibertec.conf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  *
  * @author jpere
  */
-@Configuration 
+@Configuration
+@EnableWebMvc
 @ComponentScan (basePackages={"edu.cibertec"}) //[Component/Repository / Service /Controller]
 public class DispatcherServlet { //AppConfig
  @Bean
  public InternalResourceViewResolver getInternalResourceViewResolver(){
      InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-     resolver.setPrefix("/WEB-INF/view/");
+     resolver.setPrefix("/WEB-INF/views/");
      resolver.setSuffix(".jsp");
      return resolver;
  }

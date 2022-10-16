@@ -4,12 +4,15 @@
  */
 package edu.cibertec.sabado.beans;
 
+import org.springframework.beans.factory.annotation.Value;
+
 /**
  *
  * @author Nicolas Cruz https://profesionaljava.com
  */
 public class HolaMundo {
     
+    @Value("Alumnos desde anotaciones!!")
     private String nombre;
     
     public void saludar() {

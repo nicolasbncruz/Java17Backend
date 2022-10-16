@@ -4,7 +4,10 @@
  */
 package edu.cibertec.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -12,7 +15,15 @@ import lombok.Data;
  */
 @Data
 public class UsuarioDTO {
+    
+    private Integer idUsuario;
+    
+    @Size(min=3, max= 20)
     private String usuario;
+    @NotNull
+    @NotBlank
     private String clave;
-    private String nombreApellido;
+     @Size(min=10, max= 50)
+    private String nombreApellido; 
+     private byte [] foto;
 }
