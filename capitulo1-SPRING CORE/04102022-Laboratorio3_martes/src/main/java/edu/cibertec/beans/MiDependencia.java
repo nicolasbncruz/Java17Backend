@@ -8,16 +8,16 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author Nicolas Cruz https://profesionaljava.com
+ * @author jpere
  */
 @Component
 public class MiDependencia {
 
     public MiDependencia() {
-        System.out.println("Se contruye el Bean MiDependencia!");
+        System.out.println("Construyendo el Bean MiDependencia");
     }
     
     public void imprimir(){
-        System.out.println("IMPRIMIR");
+        System.out.println("Metodo Imprimir");
     }
 }

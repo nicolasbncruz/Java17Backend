@@ -10,13 +10,16 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author Nicolas Cruz https://profesionaljava.com
+ * @author jpere
  */
 @Component
 public abstract class MiClase {
 
+    
+    
     public void algunMetodo() {
-        MiDependencia miDependencia =  instanciarMiDependencia();              
+        MiDependencia miDependencia =  instanciarMiDependencia();       
+        // continuar con el método 
         miDependencia.imprimir();
     }
 

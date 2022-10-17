@@ -4,9 +4,11 @@
  */
 package edu.cibertec.beans;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
- * @author Nicolas Cruz https://profesionaljava.com
+ * @author jpere
  */
 public interface Imprimible {
     public String imprimir();

@@ -4,14 +4,17 @@
  */
 package edu.cibertec.service;
 
+import edu.cibertec.beans.DocumentoTexto;
 import edu.cibertec.beans.Imprimible;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 /**
  *
- * @author Nicolas Cruz https://profesionaljava.com
+ * @author jpere
  */
 @Service
 //@DependsOn(value = {

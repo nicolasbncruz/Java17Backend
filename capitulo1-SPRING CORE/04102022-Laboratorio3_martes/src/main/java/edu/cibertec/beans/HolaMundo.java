@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author Nicolas Cruz https://profesionaljava.com
+ * @author jpere
  */
 @Component ("holaMundoBean")
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)

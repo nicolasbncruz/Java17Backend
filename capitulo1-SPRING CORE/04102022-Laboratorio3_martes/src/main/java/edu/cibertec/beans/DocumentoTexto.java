@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
  * @author Nicolas Cruz https://profesionaljava.com
  */
 @Repository
+//@Lazy(value = true)
 public class DocumentoTexto implements Imprimible  {
     @Override
     public String imprimir() {
@@ -21,11 +22,11 @@ public class DocumentoTexto implements Imprimible  {
     
     @PostConstruct
     public void iniciar(){
-        System.out.println("Se inicia la Construccion del Bean DocumentoTexto");
+        System.out.println("Iniciando la Construccion del Bean DocumentoTexto!!");
     }
     
     @PreDestroy
     public void destruir(){
-        System.out.println("Se Destruye el Bean DocumentoTexto");
+        System.out.println("Destruyendo el Bean DocumentoTexto!!");
     }
 }

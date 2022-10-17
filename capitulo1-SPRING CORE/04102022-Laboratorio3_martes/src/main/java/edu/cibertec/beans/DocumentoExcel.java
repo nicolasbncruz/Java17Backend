@@ -10,9 +10,10 @@ import org.springframework.stereotype.Controller;
 
 /**
  *
- * @author Nicolas Cruz https://profesionaljava.com
+ * @author jpere
  */
 @Controller
+//@Lazy(value = true)
 public class DocumentoExcel implements Imprimible  {
     @Override
     public String imprimir() {
@@ -21,11 +22,11 @@ public class DocumentoExcel implements Imprimible  {
     
     @PostConstruct
     public void iniciar(){
-        System.out.println("Se inicia la Construccion del Bean DocumentoExcel!!");
+        System.out.println("Inicia la Construccion del Bean DocumentoExcel!!");
     }
     
     @PreDestroy
     public void destruir(){
-        System.out.println("Se destruye el Bean DocumentoExcel");
+        System.out.println("Destruyendo el Bean DocumentoExcel!!");
     }
 }
