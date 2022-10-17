@@ -4,6 +4,7 @@
  */
 package edu.cibertec.service;
 
+import java.util.Date;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -29,30 +30,30 @@ public class AuditoriaAOP {
    
    @Before("generico()")   
    public void alertarAntes(JoinPoint JP){
-       System.out.println("Auditoria antes de ejecutar el metodo "+JP.getSignature().getName());
+       System.out.println("Auditoria antes de ejecutar el metodo: "+ new Date());
    }
    
    @After("generico()")   
    public void alertarDespues(){
-       System.out.println("Auditoria despues de ejecutar el metodo");
+       System.out.println("Auditoria despues de ejecutar el metodo: "+ new Date());
    }
    
    @Around("generico()")
    public void alertarAlrededor(ProceedingJoinPoint pjp) throws Throwable{
-       System.out.println("Auditoria al rededor de la ejecucion del metodo "+pjp.getSignature().getName());
+       System.out.println("Auditoria al rededor de la ejecucion del metodo: "+ new Date());
        pjp.proceed();
    }
    
    @AfterReturning("generico()")
    //@AfterReturning(pointcut = "generico()") 
    public void alertarDespuesDeLaRespuesta(){
-       System.out.println("Auditoria despues de ejecutar el metodo si no hay ningun error");
+       System.out.println("Auditoria despues de ejecutar el metodo si no hay ningun error: "+ new Date());
    }
    
    //@AfterThrowing("generico()")
    //@AfterThrowing(pointcut = "generico()") 
    @AfterThrowing("execution(* edu.cibertec.beans.*.*(..))") // Se ejecuta directamente sin considerar el Pointcut de la clase  
    public void alertarExcepcion(){
-       System.out.println("Auditoria en la excepcion");
+       System.out.println("Auditoria en la excepcion: "+ new Date());
    }
 }
