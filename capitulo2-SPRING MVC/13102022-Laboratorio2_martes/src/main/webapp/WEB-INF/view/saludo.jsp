@@ -11,8 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Primera App Spring MVC</title>
     </head>
-    <body>        
-        <h1>Laboratorio 1</h1>
+    <body>
+        <h1>${mensaje1}</h1>
+        <h1>${mensaje2}</h1>
         <h2>Mensaje directo del jsp</h2>
     </body>
 </html>
