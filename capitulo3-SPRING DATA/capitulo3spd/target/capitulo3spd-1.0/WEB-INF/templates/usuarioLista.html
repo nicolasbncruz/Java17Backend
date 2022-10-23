@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>Mantenimiento de usuarios</title>
+    </head>
+    <body>
+        <h1>Listado de Usuarios</h1>
+        <br/>
+        <div class="table-responsive">
+            <table class="table table-responsive table-sm table-dark table-striped table-bordered table-hover">
+            <thead>
+                <tr class="info">
+                    <th>Usuario</th>
+                    <th>Clave</th>
+                    <th>Nombre completo</th>
+                    <th>Foto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${lista}">
+                    <td th:text="${user.usuario}"></td>
+                    <td th:text="${user.clave}"></td>
+                    <td th:text="${user.nombreApellido}"></td>
+                    <td><a th:href="@{'fotoMostrar.do?idUsuario=' + ${user.idUsuario}}">foto</a></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <a th:href="@{'usuarioCrear.do'}"  class="btn btn-primary btn-lg active">Crear Usuario</a>
+        <br />
+        <h3 th:text="'Se han creado en esta sesi&oacute;n '+${contador}+' usuarios!'">Titulo</h3>
+    </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Datos del Usuario</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <style type="text/css">
+            .formFieldError { background-color: #FFC; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row d-flex justify-content-center mx-auto">
+
+                <h1>Datos del usuario</h1>
+                <div class="col-md-6 col-xs-12 div-style">
+                    <form th:object="${usuarioBean}" th:action="@{usuarioGrabar.do}" method="post">
+                        <table>
+                            <tr>
+                                <td><label for="usuario">Usuario: </label></td>
+                                <td><input id="usuario" th:field="*{usuario}" class="form-control text-box" /></td>
+                                <td th:if="${#fields.hasErrors('usuario')}" th:errorclass="formFieldError" th:errors="*{usuario}" /></td>
+                            </tr>
+                            <tr>
+                                <td><label for="clave">Clave: </label></td>
+                                <td><input id="clave" th:field="*{clave}" class="form-control text-box" /></td>
+                                <td th:if="${#fields.hasErrors('clave')}" th:errorclass="formFieldError" th:errors="*{clave}" /></td>
+                            </tr>
+                            <tr>
+                                <td><label for="nombreApellido">Nombre Completo: </label></td>
+                                <td><input id="nombreApellido" th:field="*{nombreApellido}" class="form-control text-box" /></td>
+                                <td th:if="${#fields.hasErrors('nombreApellido')}" th:errorclass="formFieldError" th:errors="*{nombreApellido}" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="1">
+                                    <input type="submit" value="Insertar" class="btn btn-primary button-submit"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
