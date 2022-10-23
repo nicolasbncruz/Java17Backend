@@ -25,15 +25,6 @@ public class SaludoController {
         return "saludo";
     }*/
     
-    /*@RequestMapping("saludo")
-    public ModelAndView Saludar(){
-        ModelAndView mv = new ModelAndView();
-        mv.addObject("mensaje1", "Bienvenido desde el controlador!!!");
-        mv.addObject("mensaje2", "Nicolas Cruz Carpio ModelAndView!!");
-        mv.setViewName("saludo");
-        return mv;
-    }*/
-    
     @RequestMapping("saludo")
     public ModelAndView Saludar(){
         ModelAndView mv = new ModelAndView();
@@ -42,4 +33,21 @@ public class SaludoController {
         mv.setViewName("saludo");
         return mv;
     }
+    
+    /*@RequestMapping("saludo")
+    public ModelAndView Saludar(){
+        ModelAndView mv = new ModelAndView("saludo", "mensaje1", "bienvenido desde el controlador Model And view");        
+        return mv;
+    }*/
+    
+    /*
+    @RequestMapping("saludo")
+    public ModelAndView Saludar(@RequestParam("Nombre")String Nombre){
+        Map<String, String> mp = new HashMap<>();
+        mp.put("mensaje1", "Bienvenido desde el controlador!!!");        
+        mp.put("mensaje2", Nombre);
+        ModelAndView mv = new ModelAndView("saludo", mp);
+        return mv;
+    } */
+        
 }

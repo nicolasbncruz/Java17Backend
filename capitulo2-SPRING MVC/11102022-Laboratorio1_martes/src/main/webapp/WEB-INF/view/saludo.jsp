@@ -14,6 +14,6 @@
     <body>
         <h1>${mensaje1}</h1>
         <h1>${mensaje2}</h1>
-        <h1>Esha esshh!!!</h1>
+        <h2>Mensaje directo del jsp</h2>
     </body>
 </html>
