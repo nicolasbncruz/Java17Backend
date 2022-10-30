@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Foto de usuario</title>
+    </head>
+    <body>
+        <h1>Foto del Usuario</h1>
+        <h2 th:unless="${usuario.foto}" th:text="'Usuario a&uacute;n sin foto'"></h2>
+        <img th:src="@{'data:image/jpeg;base64,'+${foto64}}" th:if="${usuario.foto}" />
+        <br />
+        <form method="post" th:action="@{fotoGrabar.do}" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>Selecciona foto: </td>
+                    <td><input type="file" name="archivo"></td>
+                </tr>
+                <tr>
+                </tr>
+                <tr><td colspan="2" align="center">
+                        <input type="submit" value="Subir foto en jpg"></td>
+                </tr>
+            </table>
+            <input type="hidden" name="codigoUsuario" th:value="${usuario.usuario}" />
+        </form>
+    </body>
+</html>

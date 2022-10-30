@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.cibertec.entity;
 
+import java.io.Serializable;
+import java.util.Base64;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  *
@@ -24,7 +21,8 @@ import org.hibernate.annotations.GenericGenerator;
 @Data
 @Entity
 @Table(name = "usuario")
-public class UsuarioEntity {
+//@XmlRootElement
+public class UsuarioEntity implements Serializable{
 
     @Id
     //PARA MYSQL
@@ -36,18 +34,24 @@ public class UsuarioEntity {
     @Size(min = 3, max = 20)
     @NotNull
     @NotBlank
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String usuario;
     @NotNull
     @NotBlank
-    @Column(nullable = false)
     private String clave;
     @NotNull
     @NotBlank
-    @Column(nullable = false)
     private String nombreApellido;
     @Column(nullable = true)
     private byte[] foto;
     @Transient
-    private String fotoBase64;
+    private String fotoBase64;   
+    
+    public String  getFotoBase64(){
+         String valor=null;
+         if(foto!=null&&foto.length>0){
+             valor=Base64.getEncoder().encodeToString(foto);
+         }
+         return valor;
+    }
 }

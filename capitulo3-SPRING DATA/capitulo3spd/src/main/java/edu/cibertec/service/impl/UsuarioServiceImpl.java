@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -30,26 +32,42 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findByUsuarioAndClave(usuario.getUsuario(), usuario.getClave());
     }
 
+    @Transactional
     @Override
-    public void insertarUsuario(UsuarioEntity usuario) {
-        usuarioRepository.save(usuario);
+    public void grabarUsuario(UsuarioEntity usuario) {
+        if(usuario.getIdUsuario()==null){
+             usuarioRepository.insertarUsuario(usuario);
+        }else{
+            usuarioRepository.save(usuario);
+        }
+    }
+    
+    @Transactional
+    @Override
+    public void eliminarUsuario(UsuarioEntity usuario) {
+        usuarioRepository.delete(usuario);
     }
 
     @Override
     public List<UsuarioEntity> listarUsuarios() {
         return usuarioRepository.findAll();
     }
+    
+    @Override
+    public List<UsuarioEntity> listarUsuarios(Pageable pagina) {
+        return usuarioRepository.findAll(pagina).getContent();
+    }
+    
+    @Override
+    public List<UsuarioEntity> listarUsuariosByUser(String usuario) {
+        return usuarioRepository.findByUsuarioLike(usuario);
+    }
+    
 
     @Override
     public UsuarioEntity getUsuario(Integer idUsuario) {
         UsuarioEntity usuario = usuarioRepository.findById(idUsuario).get();
         return usuario;
     }
-
-    @Override
-    public void subirFoto(UsuarioEntity usuario) {
-        UsuarioEntity usuarioActualizar = getUsuario(usuario.getIdUsuario());
-        usuarioActualizar.setFoto(usuario.getFoto());
-        usuarioRepository.save(usuarioActualizar);
-    }
+    
 }

@@ -16,11 +16,14 @@
 
                 <h1>Datos del usuario</h1>
                 <div class="col-md-6 col-xs-12 div-style">
-                    <form th:object="${usuarioBean}" th:action="@{usuarioGrabar.do}" method="post">
+                    <form th:object="${usuarioBean}" th:action="@{usuarioGrabar.do}" method="post" enctype="multipart/form-data">
                         <table>
                             <tr>
                                 <td><label for="usuario">Usuario: </label></td>
-                                <td><input id="usuario" th:field="*{usuario}" class="form-control text-box" /></td>
+                                <td>                                    
+                                    <input id="idUsuario" th:field="*{idUsuario}" type="hidden"/>
+                                    <input id="usuario" th:field="*{usuario}" class="form-control text-box" />
+                                </td>
                                 <td th:if="${#fields.hasErrors('usuario')}" th:errorclass="formFieldError" th:errors="*{usuario}" /></td>
                             </tr>
                             <tr>
@@ -34,8 +37,20 @@
                                 <td th:if="${#fields.hasErrors('nombreApellido')}" th:errorclass="formFieldError" th:errors="*{nombreApellido}" /></td>
                             </tr>
                             <tr>
+                                <td><label for="nombreApellido">Foto: </label></td>
+                                <td>
+                                    <span th:if="*{fotoBase64==null}" th:text="|SIN FOTO|" th:remove="tag">Sin Foto                            
+                                    </span>
+                                    <img th:if="*{fotoBase64!=null}" th:src="@{'data:image/jpeg;base64,'+*{fotoBase64}}" height="25" width="25"/>
+                                    <br>
+                                    <input type="file" id="archivo" name="archivo"  class="form-control text-box"  >
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
                                 <td colspan="1">
-                                    <input type="submit" value="Insertar" class="btn btn-primary button-submit"/>
+                                    <input id="accion" name="accion" type="hidden" th:value="${accion}" />
+                                    <input type="submit" th:value="${accion}" class="btn btn-primary button-submit"/>
                                 </td>
                             </tr>
                         </table>
