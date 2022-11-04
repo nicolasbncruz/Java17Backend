@@ -15,6 +15,7 @@
      Para empaquetar en un WAR y enviarlo a un Tomcat
      <packaging>war</packaging>
     -->
+    <packaging>war</packaging>
     <name>matricula</name>
     <description>Demo project for Spring Boot</description>
     <properties>

@@ -1,11 +1,9 @@
-package edu.cibertec.matricula.controller;
+package edu.cibertec.sec04.controller;
 
-
-import edu.cibertec.matricula.entity.UsuarioEntity;
-import edu.cibertec.matricula.service.UsuarioService;
 import java.io.IOException;
 import java.util.List;
-import javax.validation.Valid;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,21 +19,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- *
- * @author jpere
- */
+import edu.cibertec.sec04.dto.UsuarioDTO;
+import edu.cibertec.sec04.entity.UsuarioEntity;
+import edu.cibertec.sec04.service.UsuarioService;
+
 @Controller
 @SessionAttributes("contador")
+
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
     private Integer valor = 1;
 
-    @RequestMapping("/")
+    @RequestMapping("login")
     public String login() {
         return "login";
     }
@@ -54,6 +55,7 @@ public class UsuarioController {
         return mv;
     }
 
+    
     @RequestMapping("usuarioListar")
     public ModelAndView usuarioListar() {
         ModelAndView mv = new ModelAndView("usuarioLista", "lista", usuarioService.listarUsuarios());
@@ -61,6 +63,7 @@ public class UsuarioController {
         return mv;
     }
 
+    
     @RequestMapping("usuarioListarPag")
     public ModelAndView usuarioListarPag(@RequestParam("pag") int pag, @RequestParam("columna") String columna, @RequestParam("orden") String orden) {
 
@@ -81,14 +84,16 @@ public class UsuarioController {
         mv.addObject("orden", orden);
         return mv;
     }
+    
 
     @RequestMapping("usuarioCrear")
     public ModelAndView usuarioCrear() {
-        ModelAndView mv = new ModelAndView("usuarioDatos", "usuarioBean", new UsuarioEntity());
+        ModelAndView mv = new ModelAndView("usuarioDatos", "usuarioBean", new UsuarioDTO());
         mv.addObject("accion", "Crear");
         return mv;
     }
 
+    
     @RequestMapping("usuarioModificar")
     public ModelAndView usuarioModificar(@RequestParam("idUsuario") Integer idUsuario) {
         ModelAndView mv = new ModelAndView("usuarioDatos", "usuarioBean", usuarioService.getUsuario(idUsuario));
@@ -96,13 +101,21 @@ public class UsuarioController {
         return mv;
     }
 
-    @RequestMapping("usuarioGrabar")
-    public ModelAndView grabarUsuario(@RequestParam("accion") String accion, @RequestParam("archivo") MultipartFile archivo, @Valid @ModelAttribute("usuarioBean") UsuarioEntity usuario, BindingResult resulta, ModelMap modelo) throws IOException {
-        ModelAndView mv = null;
+    
+    @RequestMapping(value = "usuarioGrabar", method = RequestMethod.POST)
+    public ModelAndView grabarUsuario(@RequestParam("accion") String accion, @RequestParam("archivo") MultipartFile archivo, 
+    	@Validated	@ModelAttribute("usuarioBean") UsuarioEntity usuario, BindingResult resulta, ModelMap modelo) throws IOException {
+        
+    	ModelAndView mv = null;
         if (resulta.hasErrors()) {
             mv = new ModelAndView("usuarioDatos", "usuarioBean", usuario);
         } else {
-            usuario.setFoto(archivo.getBytes());
+        	
+
+        	if (archivo.getOriginalFilename() != "" && !archivo.getOriginalFilename().equals(null)) {
+        		usuario.setFoto(archivo.getBytes());
+        	}
+        	        	
             usuarioService.grabarUsuario(usuario);
             Integer contador = (Integer) modelo.get("contador");
             if (contador == null) {
@@ -116,13 +129,18 @@ public class UsuarioController {
         return mv;
     }
 
+    
+    
     @RequestMapping("usuariEliminar")
-    public ModelAndView usuariEliminar(UsuarioEntity usuario) {
+    public ModelAndView usuariEliminar(@RequestParam(name = "idUsuario") Integer idUsuario) {
+    	UsuarioEntity usuario = new UsuarioEntity();
+    	usuario.setIdUsuario(idUsuario);
         usuarioService.eliminarUsuario(usuario);
-        return new ModelAndView("redirect:usuarioListar");
+    	return new ModelAndView("redirect:usuarioListar");
     }
 
-//   @RequestMapping("listarUsuarios")
+    
+    //@RequestMapping("listarUsuarios")
     @RequestMapping(
             value = "listarUsuarios",
             method = RequestMethod.GET,

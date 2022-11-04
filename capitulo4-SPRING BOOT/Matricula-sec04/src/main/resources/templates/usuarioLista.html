@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>Mantenimiento de usuarios</title>
+    </head>
+    <body>
+        <h1>Listado de Usuarios</h1>
+        <br/>
+        <div class="table-responsive">
+            <table class="table table-responsive table-sm table-dark table-striped table-bordered table-hover">
+            <thead>
+                <tr class="info">
+                    <th> <a th:href="@{usuarioListarPag(pag=0,orden=${orden},columna=usuario)}">Usuario</a></th>
+                    <th><a th:href="@{usuarioListarPag(pag=0,orden=${orden},columna=clave)}">Clave</a></th>
+                    <th><a th:href="@{usuarioListarPag(pag=0,orden=${orden},columna=nombreApellido)}">Nombre completo</a></th>
+                    <th>Foto</th>
+                    <th>Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${lista}">
+                    <td>
+                        <a th:href="@{'usuarioModificar?idUsuario=' + ${user.idUsuario}}"  th:text="${user.usuario}"></a>                       
+                    </td>
+                    <td th:text="${user.clave}"></td>
+                    <td th:text="${user.nombreApellido}"></td>
+                    <td>
+                        <span th:if="${user.fotoBase64==null}" th:text="|SIN FOTO|" th:remove="tag">Sin Foto                            
+                        </span>
+                        <img th:if="${user.fotoBase64!=null}" th:src="@{'data:image/jpeg;base64,'+${user.fotoBase64}}" height="25" width="25"/>
+                    </td>
+<!--                     <td><a th:href="@{'usuariEliminar.do?idUsuario=' + ${user.idUsuario}}" onclick="revisarEliminacion()">Eliminar</a></td> -->
+                    <td><a th:onclick="revisarEliminacion([[${user.idUsuario}]],[[${user.nombreApellido}]])">Eliminar</a></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <a th:href="@{usuarioListarPag(pag=0,orden=${orden},columna=${param.columna})}"  class="btn btn-primary btn-lg active">Primera</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{usuarioListarPag(pag=1,orden=${orden},columna=${param.columna})}"  class="btn btn-primary btn-lg active">Segunda</a>
+        
+        <br/><br/>
+        <a th:href="@{'usuarioCrear'}"  class="btn btn-primary btn-lg active">Crear Usuario</a>
+        <br />
+        <h3 th:text="'Se han creado en esta sesi&oacute;n '+${contador}+' usuarios!'">Titulo</h3>
+        
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <script type="text/javascript">
+        	function revisarEliminacion(idUsuario, nombreApellido){
+        		
+        		  Swal.fire({
+        			    title: "Desea borrar al user, " + nombreApellido+" ?",
+        			    showDenyButton: true,
+        			    showCancelButton: true,
+        			    confirmButtonText: "Confirmar Borrado",
+        			    denyButtonText: `Cancelar Operación`,
+        			  }).then((result) => {
+
+        			    if (result.isConfirmed) {
+        			    	location.href = "usuariEliminar?idUsuario="+idUsuario;
+        			        Swal.fire("Cambios Guardados!", "", "success");
+        			    }else if (result.isDenied) {
+        			        
+        			        Swal.fire("Se cancela la operación", "", "info");
+        			    }
+        			    }
+        			 );
+        	}
+        
+        </script>
+        
+    </body>
+</html>
