@@ -39,7 +39,7 @@ public class CursoRepositoryImpl implements CursoRepository {
 
   @Override
   public void insertar(CursoDTO curso) {
-    restTemplate.postForObject(urlServicio, curso, CursoDTO.class);
+    restTemplate.postForEntity(urlServicio, curso, CursoDTO.class);
   }
 
   @Override

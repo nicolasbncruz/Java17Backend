@@ -27,16 +27,15 @@ public class CursoController {
   public ModelAndView cursoGrabar(@ModelAttribute("cursoBean") CursoDTO curso){
     ModelAndView mv = new ModelAndView("curso");
     cursoService.insertar(curso);
-    mv.addObject("cursoBean", new CursoDTO());
     mv.addObject("lista",cursoService.listarTodos());
+    mv.addObject("cursoBean", new CursoDTO());
     return mv;
   }
 
   @RequestMapping("cursoEliminar")
   public ModelAndView cursoEliminar(@RequestParam("codigo") Integer codigo){
     cursoService.eliminar(codigo);
-    ModelAndView mv = new ModelAndView("redirect:cursoListar");
-    return mv;
+    return new ModelAndView("redirect:cursoListar");
   }
 
 
