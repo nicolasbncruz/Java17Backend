@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>Mantenimiento de Cursos</title>
+        <style type="text/css">
+            .formFieldError { color: red; }
+        </style>
+    </head>
+    <body>
+        <h1>Mantenimiento de Cursos</h1>
+        <br/>
+        <div class="table-responsive">
+            <table class="table table-responsive table-sm table-light table-striped table-bordered table-hover">
+                <thead>
+                    <tr class="success">
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Fecha Inicio</th>
+                        <th>Minimo alumnos</th>
+                        <th>Inscritos</th>
+                        <th>Estado</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="curso : ${lista}">
+                        <td th:text="${curso.idCurso}"></td>
+                        <td th:text="${curso.nomCurso}"></td>
+                        <td th:text="${#dates.format(curso.fechaInicio, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${curso.alumnosMin}"></td>
+                        <td th:text="${curso.alumnosAct}"></td>
+                        <td th:text="${curso.estado}"></td>
+                        <td>
+                            <a th:href="@{|cursoEliminar?codigo=| + ${curso.idCurso}}" th:text="|SI|"/>
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br/>
+        <hr/>
+        <div class="container">
+            <div class="row d-flex justify-content-center mx-auto">
+                <br/>
+                <div class="login-form">
+                <h1>Datos del curso a ingresar</h1>
+                    <form action="#" th:action="@{/cursoGrabar}" th:object="${cursoBean}" method="post">
+                        <div class="form-group">
+                            <input type="text" th:field="*{nomCurso}" class="form-control text-box"
+                                   placeholder="Nombre Curso" />
+                            <p th:if="${#fields.hasErrors('nomCurso')}" th:errorclass="formFieldError"
+                                       th:errors="*{nomCurso}" /></p>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" th:field="*{fechaInicio}" class="form-control text-box"
+                                   placeholder="Fecha Inicio"/>
+                            <p th:if="${#fields.hasErrors('fechaInicio')}" th:errorclass="formFieldError"
+                                       th:errors="*{fechaInicio}" /></p>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" th:field="*{alumnosMin}" class="form-control text-box"
+                                   placeholder="Mínimo Alumnos" required/>
+                            <p th:if="${#fields.hasErrors('alumnosMin')}" th:errorclass="formFieldError"
+                                       th:errors="*{alumnosMin}" /></p>
+                        </div>
+                        <div class="form-group">
+                            <select th:field="*{estado}" class="form-control text-box" required>
+                                <option value="0">CREADO</option>
+                                <option value="1">EN PROCESO DE VENTA</option>
+                                <option value="2">COMPLETO</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Grabar" class="btn btn-primary button-submit"/>
+                        <a th:href="@{|cursoListar|}" th:text="|Cancelar|" class="btn btn-primary button-submit"></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
