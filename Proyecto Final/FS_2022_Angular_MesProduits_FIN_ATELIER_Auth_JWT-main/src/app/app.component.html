@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Gestion de Usuarios</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Gestion Produits</a>
+    <!-- Links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="produits">Lista Usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="authService.isAdmin()" class="nav-link" routerLink="add-produit">Crear usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/listeCategories">Sucursales</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="usuarios">List Usuarios2</a>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="authService.isAdmin()" class="nav-link" routerLink="add-usuarios">Crear usuarios2</a>
+      </li>
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" hidden=true>
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Produits</a>
+        <div class="dropdown-menu">
+          <a *ngIf="authService.isAdmin()"  class="dropdown-item" routerLink="add-produit">Crear usuarios</a>
+          <a class="dropdown-item" href="#">Listar Usuarios</a>
+          <!-- <a class="dropdown-item"  routerLink="/rechercheParCategorie" >Buscar Por Sucursal</a> -->
+          <!-- <a class="dropdown-item" routerLink="/rechercheParNom" >Buscar Por Nombre</a> -->
+          <a class="dropdown-item" routerLink="/listeCategories" >Gestion de Sucursales</a>
+
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li> <a class="nav-link">{{authService.loggedUser}}</a></li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+         Estas logueado
+        </a>
+        <div class="dropdown-menu">
+          <a *ngIf="!authService.isloggedIn"  class="dropdown-item" routerLink = "login">logout</a>
+          <a *ngIf="authService.isloggedIn" class="dropdown-item" (click) = "onLogout()">logout</a>
+          <!-- <a class="dropdown-item" href="#">Profile</a> -->
+        </div>
+      </li>
+    </ul>
+  </nav>
+</body>
+
+</html>
+<router-outlet></router-outlet>

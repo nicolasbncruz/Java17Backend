@@ -1,0 +1,51 @@
+<div class="container">
+    <div>
+        <h2>Registrar Usuario :</h2>
+    </div>
+    <form>
+        <div hidden class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID Produit</label>
+            <input type="text" [(ngModel)]="newProduit.idProduit" name="idProduit" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nombre</label>
+            <input type="text" [(ngModel)]="newProduit.nomProduit" name="nomProduit" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Usuario</label>
+            <input type="number" [(ngModel)]="newProduit.prixProduit" name="prixProduit" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Pasword</label>
+            <input type="date" [(ngModel)]="newProduit.dateCreation" name="dateCreation" class="form-control">
+        </div>
+
+         <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Sucursal</label>
+            <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="newIdCat">
+                <option *ngFor="let cat of categories" [value]="cat.idCat">
+                    {{cat.nomCat}}
+                </option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3" style="width: 440px; margin-top: 35px; margin-left: 15px;">
+          <div class="custom-file">
+            <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+            <label class="custom-file-label" for="inputGroupFile04">Seleccionar foto</label>
+          </div>
+          <div class="input-group-append">
+            <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+          </div>
+        </div>
+
+        <div *ngIf="progreso > 0" class="progress" style="height: 40px;">
+          <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width:progreso+'%'}" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">
+            {{progreso}}%
+          </div>
+        </div>
+        <div class="mt-2" >
+            <button type="submit" (click)="addProduit()" class="btn btn-success">Registrar</button>
+        </div>
+    </form>
+</div>

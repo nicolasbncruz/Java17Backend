@@ -1,0 +1,53 @@
+<div class="container">
+  <div>
+      <h2>Modifier un Produit :</h2>
+  </div>
+  <form>
+      <div  class="col-sm-2 col-md-2 col-lg-2">
+          <label>ID Produit</label>
+          <input readonly type="text" [(ngModel)]="currentProduit.idProduit" name="idProduit" class="form-control">
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+          <label>Nom Produit</label>
+          <input type="text" [(ngModel)]="currentProduit.nomProduit" name="nomProduit" class="form-control">
+      </div>
+      <div class="col-sm-2 col-md-2 col-lg-2">
+          <label>Prix Produit</label>
+          <input type="number" [(ngModel)]="currentProduit.prixProduit" name="prixProduit" class="form-control">
+      </div>
+      <div class="col-sm-4 col-md-4 col-lg-4">
+          <label>Date création</label>
+          <input type="date" [ngModel]="currentProduit.dateCreation | date: 'yyyy-MM-dd'"
+          (ngModelChange)=" currentProduit.dateCreation= $event" name="dateCreation"  class="form-control">
+      </div>
+
+       <div class="col-sm-4 col-md-4 col-lg-4">
+          <label>Categorie</label>
+          <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="updatedCatId">
+              <option *ngFor="let cat of categories" [value]="cat.idCat">
+                  {{cat.nomCat}}
+              </option>
+          </select>
+      </div>
+
+      <div class="input-group mb-3" style="width: 440px; margin-top: 35px; margin-left: 15px;">
+        <div class="custom-file">
+          <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+          <label class="custom-file-label" for="inputGroupFile04">Seleccionar foto</label>
+        </div>
+        <div class="input-group-append">
+          <button (click)="subirFoto()" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+        </div>
+      </div>
+
+      <div *ngIf="progreso > 0" class="progress" style="height: 40px;">
+        <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width:progreso+'%'}" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">
+          {{progreso}}%
+        </div>
+      </div>
+
+      <div class="mt-2">
+          <button type="submit" (click)="updateProduit()" class="btn btn-success">Modifer</button>
+      </div>
+  </form>
+</div>
